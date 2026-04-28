@@ -1,0 +1,290 @@
+/* ============================================================
+   Portfolio.css — Portfolio / Projects Section
+   Depends on: markojotic-design-system.css imported before this
+   ============================================================ */
+
+
+/* ── SECTION WRAPPER ──────────────────────────────────────── */
+
+.portfolio {
+  background-color: var(--color-bg-primary);
+  padding-block: var(--space-24);
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+.portfolio__container {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+
+/* ── ENTRANCE ANIMATION ───────────────────────────────────── */
+
+.port-anim {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.75s var(--ease-out-expo),
+    transform 0.75s var(--ease-out-expo);
+}
+
+.portfolio--visible .port-anim {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-1 { transition-delay: 0.05s; }
+.delay-2 { transition-delay: 0.22s; }
+.delay-3 { transition-delay: 0.38s; }
+
+
+/* ── HEADER ───────────────────────────────────────────────── */
+
+.portfolio__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.portfolio__index {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+}
+
+.portfolio__statement {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-2xl), 3.8vw, var(--text-4xl));
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+  max-width: 24ch;
+}
+
+
+/* ── PROJECT GRID ─────────────────────────────────────────── */
+/* Matches screenshot: 2-column grid of large image cards      */
+
+.portfolio__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-10);
+}
+
+
+/* ── CARD ─────────────────────────────────────────────────── */
+
+.portfolio__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  background-color: transparent;
+}
+
+
+/* ── CARD IMAGE WRAP ──────────────────────────────────────── */
+
+.portfolio__card-img-wrap {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: var(--border-width) solid var(--color-border);
+  /* Tall aspect ratio — matches the large image cards in the screenshot */
+  aspect-ratio: 4 / 3;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.portfolio__card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition:
+    transform 0.6s var(--ease-out-expo),
+    filter 0.6s var(--ease-out-expo);
+  filter: grayscale(10%) brightness(0.92);
+}
+
+.portfolio__card-img-wrap:hover .portfolio__card-img {
+  transform: scale(1.04);
+  filter: grayscale(0%) brightness(1);
+}
+
+/* Hover overlay with "View Project" text */
+.portfolio__card-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(14, 14, 14, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-slow);
+  border-radius: var(--radius-md);
+}
+
+.portfolio__card-img-wrap:hover .portfolio__card-overlay {
+  opacity: 1;
+}
+
+.portfolio__card-view {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  border: var(--border-width) solid rgba(240, 237, 232, 0.4);
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-6);
+  backdrop-filter: blur(4px);
+}
+
+/* Category badge — top-left corner of the image */
+.portfolio__card-category {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  background-color: rgba(14, 14, 14, 0.75);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-1) var(--space-3);
+  backdrop-filter: blur(8px);
+  line-height: 1.6;
+}
+
+
+/* ── CARD FOOTER ──────────────────────────────────────────── */
+
+.portfolio__card-footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Title row: name left, year right — exactly as in screenshot */
+.portfolio__card-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.portfolio__card-title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-primary);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+}
+
+.portfolio__card-year {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  letter-spacing: var(--tracking-wide);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Problem statement */
+.portfolio__card-problem {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-light);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: none;
+}
+
+/* View project link */
+.portfolio__card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+  transition: color var(--transition-base), gap var(--transition-base);
+  align-self: flex-start;
+  margin-top: var(--space-1);
+}
+
+.portfolio__card-link:hover {
+  color: var(--color-text-primary);
+  gap: var(--space-3);
+}
+
+.portfolio__card-arrow {
+  flex-shrink: 0;
+  transition: transform var(--transition-base);
+}
+
+.portfolio__card-link:hover .portfolio__card-arrow {
+  transform: translate(2px, -2px);
+}
+
+
+/* ── RESPONSIVE ───────────────────────────────────────────── */
+
+/* Tablet */
+@media (max-width: 1023px) {
+  .portfolio__grid {
+    gap: var(--space-8);
+  }
+
+  .portfolio__statement {
+    max-width: 100%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 639px) {
+  .portfolio {
+    padding-block: var(--space-16);
+  }
+
+  .portfolio__container {
+    gap: var(--space-10);
+  }
+
+  /* Stack to single column on mobile */
+  .portfolio__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+  }
+
+  .portfolio__statement {
+    font-size: clamp(var(--text-xl), 6vw, var(--text-3xl));
+  }
+
+  .portfolio__card-img-wrap {
+    aspect-ratio: 3 / 2;
+  }
+
+  .portfolio__card-category {
+    font-size: 0.65rem;
+  }
+}

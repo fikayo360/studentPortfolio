@@ -1,0 +1,229 @@
+/* ============================================================
+   nav.css — Floating Pill Navbar
+   Depends on: markojotic-design-system.css imported before this
+   All colours, spacing, and typography now use design tokens.
+   ============================================================ */
+
+
+/* ── HEADER SHELL ─────────────────────────────────────────── */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  justify-content: center;
+  padding: var(--space-4);
+
+  /* Entrance — slides down from above */
+  opacity: 0;
+  transform: translateY(-12px);
+  transition:
+    opacity 0.55s var(--ease-out-expo),
+    transform 0.55s var(--ease-out-expo),
+    padding var(--transition-base);
+  pointer-events: none;
+}
+
+.nav--visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.nav--scrolled {
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
+}
+
+
+/* ── FLOATING PILL ────────────────────────────────────────── */
+
+.nav__pill {
+  position: relative;
+  background-color: var(--color-bg-overlay);   /* #111111 — near-black */
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-1);
+  transition: box-shadow var(--transition-base);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.nav--scrolled .nav__pill {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+
+/* ── SLIDING ACTIVE INDICATOR ─────────────────────────────── */
+
+.nav__indicator {
+  position: absolute;
+  top: var(--space-1);
+  height: calc(100% - var(--space-2));
+  background-color: var(--color-text-primary);  /* Warm off-white pill */
+  border-radius: var(--radius-full);
+  transition:
+    left 0.35s var(--ease-out-expo),
+    width 0.35s var(--ease-out-expo);
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+/* ── LIST ─────────────────────────────────────────────────── */
+
+.nav__list {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-1);
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ── NAV BUTTON ───────────────────────────────────────────── */
+
+.nav__btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: clamp(var(--text-xs), 1.1vw, var(--text-sm));
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-secondary);     /* Muted — inactive state */
+  white-space: nowrap;
+  transition: color var(--transition-base);
+  position: relative;
+  z-index: 1;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav__btn:hover {
+  color: var(--color-text-primary);
+}
+
+/* Active state — sits on the white indicator, so text goes dark */
+.nav__btn--active {
+  color: var(--color-text-inverse);       /* Near-black on white pill */
+}
+
+.nav__btn--active:hover {
+  color: var(--color-text-inverse);
+}
+
+
+/* ── ICON (mobile only) ───────────────────────────────────── */
+
+.nav__icon {
+  display: none;
+  font-size: var(--text-lg);
+  line-height: 1;
+}
+
+/* ── LABEL (desktop) ──────────────────────────────────────── */
+
+.nav__label {
+  display: block;
+  line-height: 1;
+}
+
+
+/* ── RESPONSIVE — MOBILE ──────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .nav {
+    top: var(--space-4);
+    padding: 0 var(--space-3);
+  }
+
+  .nav__pill {
+    width: 100%;
+    max-width: 560px;
+    border-radius: 28px;
+    padding: 0 var(--space-2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+  }
+
+  .nav--scrolled {
+    padding-top: 0;
+    padding-bottom: var(--space-5);
+  }
+
+  .nav__list {
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--space-2) 0;
+  }
+
+  .nav__btn {
+    flex: 1;
+    flex-direction: column;
+    gap: 0.18rem;
+    padding: var(--space-2) var(--space-1);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-wider);
+  }
+
+  /* Active on mobile — no sliding pill, just scale + color */
+  .nav__btn--active {
+    color: var(--color-text-primary);
+    transform: scale(1.08);
+  }
+
+  .nav__btn--active:hover {
+    color: var(--color-text-primary);
+  }
+
+  /* Hide sliding indicator on mobile */
+  .nav__indicator {
+    display: none;
+  }
+
+  /* Show icons on mobile */
+  .nav__icon {
+    display: block;
+    font-size: var(--text-lg);
+  }
+}
+
+
+/* ── VERY SMALL SCREENS ───────────────────────────────────── */
+
+@media (max-width: 380px) {
+  .nav__label {
+    font-size: 0.6rem;
+  }
+
+  .nav__btn {
+    padding: var(--space-1) 0;
+  }
+}
+
+
+/* ── REDUCED MOTION ───────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .nav {
+    transition: opacity 0.2s ease;
+  }
+
+  .nav__indicator {
+    transition: none;
+  }
+
+  .nav__btn {
+    transition: none;
+  }
+}
