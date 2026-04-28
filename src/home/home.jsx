@@ -4,7 +4,7 @@ import { Navbar } from '../nav/nav';
 
 // Replace this with your actual image import or prop
 // import profileImg from '../assets/profile.jpg';
-const PLACEHOLDER_IMG = 'https://thewhistler.ng/wp-content/uploads/2025/08/Untitled-design_20250805_150325_0000.jpg';
+const PLACEHOLDER_IMG = 'https://media.istockphoto.com/id/1394347360/photo/confident-young-black-businesswoman-standing-at-a-window-in-an-office-alone.jpg?s=612x612&w=0&k=20&c=tOFptpFTIaBZ8LjQ1NiPrjKXku9AtERuWHOElfBMBvY=';
 
 export const Home = ({
   firstName = 'Miranda',
