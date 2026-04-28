@@ -48,7 +48,7 @@ export const Contact = () => {
                 href="mailto:omojowoblessing@gmail.com"
                 className="contact__email"
               >
-                omojowoblessing@gmail.com
+                mirandekanmi@gmail.com
               </a>
             </div>
 
@@ -82,9 +82,9 @@ export const Contact = () => {
 
           {/* ── FOOTER: LOGO + COPYRIGHT ───────────────── */}
           <div className="contact__footer">
-            <span className="contact__logo">Blessing</span>
+            <span className="contact__logo">Miranda</span>
             <p className="contact__copy">
-              © {new Date().getFullYear()} Omojowo Blessing Omotola. All Rights Reserved.
+              © {new Date().getFullYear()} Miranda adekanmi. All Rights Reserved.
             </p>
           </div>
 
